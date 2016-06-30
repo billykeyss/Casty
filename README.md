@@ -23,3 +23,4 @@ Stop PiCAST: sh /path-to/PiCAST/picast_stop.sh
 BROWSER REQUESTS
 
 Stream YouTube Video: http://pi-ip:3000/yt-stream/video-id
+Stream Twitch: http://pi-ip:3000/yt-stream/channel-name
