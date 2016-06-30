@@ -1,0 +1,11 @@
+# Write your default config options here!
+fs=yes
+#General setup
+
+monitoraspect="16:9"   #I'm on a widescreen laptop so keeps 4:3 content from    stretching
+framedrop="1"  # For slow machines
+hardframedrop="0" #Make sure hard frame drop is off but can turn on easily now
+
+ontop="1"
+
+cache=8192
