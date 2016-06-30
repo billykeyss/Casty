@@ -24,3 +24,6 @@ BROWSER REQUESTS
 
 Stream YouTube Video: http://pi-ip:3000/yt-stream/video-id
 Stream Twitch: http://pi-ip:3000/yt-stream/channel-name
+
+
+Copy the mplayerConfig.txt file to your mplayer config file on your local machine
