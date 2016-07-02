@@ -1,13 +1,13 @@
-h1 {
-    color: green;
-}
-
 body, html {
     overflow-x: hidden;
     overflow-y: hidden;
     background-color: black;
+    font-family: 'Open Sans', sans-serif;
 }
 
+input[type=text] {
+    color: black;
+}
 
 .container {
     height: 100vh;

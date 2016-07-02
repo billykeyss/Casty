@@ -21,7 +21,7 @@
 
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/stars.css">
-    <script src="/js/main.js"></script>
+    <script src="/js/movie.js"></script>
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
@@ -35,25 +35,20 @@
 
     <div class="container">
       <div class="jumbotron center-align">
-        {{#if title}}
-              <h1> {{title}} <h1>
-              <h2> Now Playing </h2>
-              {{#if time}}
-                <h2> {{time}}</h2>
-                <h3> Duration of video<h3>
-              {{/if}}
-        {{else}}
-              <h1> Welcome to Casty!<h1>
-              <h2> In the URL, type what you want to do... </h2>
-              <h3> For Youtube videos, type '/yt-stream/{desired-video-code}' </h2>
-              <h3> For Twitch Streams, type '/twitch-stream/{desired-channel-name}' <h3>
-        {{/if}}
-        <div >
-          <button id="target">Click here</button>
-        </div>
-        <div>
-            <button id="other">Trigger the handler</button>
-        </div>
+          <h1> Welcome to Basin 3.0 Movie List!<h1>
+          <h2> In the textbox below, enter in a movie for the queue</h2>
+          <br>
+          <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+              <div class="input-group">
+                <input type="text" id="movieName" class="form-control" placeholder="Movie Name...">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" id="submit" type="button">Submit!</button>
+                </span>
+              </div>
+            </div>
+          </div>
+
       </div>
     </div>
 

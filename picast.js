@@ -9,10 +9,10 @@ var app = express();
 
 app.set('view engine', 'html');
 app.engine('html', require('hbs').__express);
+app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res) {
-    app.use(express.static(path.join(__dirname, 'public')));
-    res.render(path.join(__dirname + '/blank.html'));
+    res.render(path.join(__dirname + '/index.html'));
 });
 
 app.get('/yt-stream/:url', function(req, res) {
@@ -29,7 +29,6 @@ app.get('/yt-stream/:url', function(req, res) {
             request(url, function(error, response, body) {
                 if (!error && response.statusCode == 200) {
                     var data = JSON.parse(body);
-                    app.use(express.static(path.join(__dirname, 'public')));
                     res.render(path.join(__dirname + '/index.html'), {
                         'title': data.items[0].snippet.title,
                         'time': time
@@ -50,12 +49,18 @@ app.get('/yt-stream/:url', function(req, res) {
 
 app.get('/twitch-stream/:url', function(req, res) {
     exec("killall livestreamer");
-    app.use(express.static(path.join(__dirname, 'public')));
     res.render(path.join(__dirname + '/index.html'), {
         'title': req.params.url + '\'s stream',
         'time': undefined
     });
     exec("livestreamer --player=mplayer twitch.tv/" + req.params.url + " best");
+});
+
+app.get('/movie-list', function(req, res) {
+    exec("killall livestreamer");
+    res.render(path.join(__dirname + '/movie.html'), {
+        'title': "test"
+    });
 });
 
 // Setup PiCAST Server
