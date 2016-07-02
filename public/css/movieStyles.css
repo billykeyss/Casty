@@ -1,0 +1,28 @@
+body, html {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background-color: black;
+    font-family: 'Open Sans', sans-serif;
+}
+
+input[type=text] {
+    color: black;
+}
+
+table {
+    margin-top:25px;
+}
+
+.container {
+    height: 100vh;
+}
+
+.jumbotron {
+    background-color:black;
+    color: white;
+}
+
+.center-align {
+    text-align:center;
+    margin-top: 0px;
+}

@@ -19,7 +19,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/movieStyles.css">
     <link rel="stylesheet" href="/css/stars.css">
     <script src="/js/movie.js"></script>
     <!--[if lt IE 9]>
@@ -34,21 +34,60 @@
     <div id='stars4'></div>
 
     <div class="container">
-      <div class="jumbotron center-align">
-          <h1> Welcome to Basin 3.0 Movie List!<h1>
+        <div class="jumbotron center-align">
+            <h1> Welcome to Basin 3.0 Movie List!<h1>
           <h2> In the textbox below, enter in a movie for the queue</h2>
           <br>
-          <div class="row">
-            <div class="col-lg-6 col-lg-offset-3">
-              <div class="input-group">
-                <input type="text" id="movieName" class="form-control" placeholder="Movie Name...">
-                <span class="input-group-btn">
-                  <button class="btn btn-default" id="submit" type="button">Submit!</button>
-                </span>
+          <form class="form-inline">
+              <div class="form-group">
+                  <div class="form-group">
+                      <div class="input-group" style="width: 250px;">
+                            <input type="text" id="year" class="form-control" placeholder="Year...">
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="input-group" style="width: 250px;">
+                          <input type="text" id="movieName" class="form-control" placeholder="Movie Name...">
+                    	</div>
+                  </div>
+                        <div class="form-group">
+                      <div class="input-group" style="width: 250px;">
+                          <input type="text" id="url" class="form-control" placeholder="Magnet Link...">
+                    	</div>
+                  </div>
               </div>
-            </div>
-          </div>
-
+          </form>
+          <br>
+          <button class="btn btn-default" style="width:120px;" id="submit" type="button">Submit!</button>
+          <br>
+          <table class="table table-bordered">
+            <col width="150">
+            <col width="150">
+            <col width="80">
+            <col width="80">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Title</th>
+                    <th>Play</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+              {{#each item.Items}}
+                <tr>
+                    <td class="year">{{year}}</td>
+                    <td class="title">{{title}}</td>
+                    <td>
+                      <button class="btn btn-success play" style="width:120px;" id="play" type="button">Play</button>
+                    </td>
+                    <td>
+                      <button class="btn btn-danger delete" style="width:120px;" id="delete" type="button">Delete</button>
+                    </td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
       </div>
     </div>
 
