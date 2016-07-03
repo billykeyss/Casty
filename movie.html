@@ -58,17 +58,23 @@
               </div>
           </form>
           <br>
-          <button class="btn btn-default" style="width:120px;" id="submit" type="button">Submit!</button>
+          <div class="btn-container">
+            <button class="submit" id="button"></button>
+          </div>
           <br>
           <table class="table table-bordered">
-            <col width="150">
-            <col width="150">
+            <col width="100">
+            <col width="100">
+            <col width="200">
+            <col width="200">
             <col width="80">
             <col width="80">
             <thead>
                 <tr>
                     <th>Year</th>
                     <th>Title</th>
+                    <th>Starring</th>
+                    <th>Plot</th>
                     <th>Play</th>
                     <th>Delete</th>
                 </tr>
@@ -78,11 +84,42 @@
                 <tr>
                     <td class="year">{{year}}</td>
                     <td class="title">{{title}}</td>
+                    <td class="actors">{{info.Actors}}</td>
+                    <td class="plot">{{info.Plot}}</td>
                     <td>
-                      <button class="btn btn-success play" style="width:120px;" id="play" type="button">Play</button>
+                      <!-- <button class="btn btn-success play" style="width:120px;" id="play" type="button">Play</button> -->
+                      <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In  -->
+                      <div class='svg-container'>
+                          <a href='#'class='playBut play'>
+                              <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In  -->
+                              <svg version="1.1"
+                              	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+                              	 x="0px" y="0px" width="50px" height="50px" viewBox="0 0 213.7 213.7" enable-background="new 0 0 213.7 213.7"
+                              	 xml:space="preserve">
+                              <polygon class='triangle' id="XMLID_18_" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+                              	73.5,62.5 148.5,105.8 73.5,149.1 "/>
+                              <circle class='circle' id="XMLID_17_" fill="none"  stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="106.8" cy="106.8" r="103.3"/>
+                              </svg>
+                          </a>
+                      </div>
                     </td>
                     <td>
-                      <button class="btn btn-danger delete" style="width:120px;" id="delete" type="button">Delete</button>
+                      <!-- <button class="btn btn-danger delete" style="width:120px;" id="delete" type="button">Delete</button> -->
+                      <div class='svg-container'>
+                          <a href='#'class='playBut delete'>
+                              <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In  -->
+                              <svg version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+                                 x="0px" y="0px" width="50px" height="50px" viewBox="0 0 213.7 213.7" enable-background="new 0 0 213.7 213.7"
+                                 xml:space="preserve">
+                              <!-- <polygon class='triangle' id="XMLID_18_" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+                                73.5,62.5 148.5,105.8 73.5,149.1 "/> -->
+                                <line class='triangle' x1="80" x2="130" y1="80" y2="130" stroke="orange" fill="transparent" stroke-width="5"/>
+                                <line class='triangle' x1="80" x2="130" y1="130" y2="80" stroke="orange" fill="transparent" stroke-width="5"/>
+                              <circle class='circle' id="XMLID_17_" fill="none"  stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="106.8" cy="106.8" r="103.3"/>
+                              </svg>
+                          </a>
+                      </div>
                     </td>
                 </tr>
               {{/each}}
@@ -90,8 +127,5 @@
           </table>
       </div>
     </div>
-
-
 </body>
-
 </html>

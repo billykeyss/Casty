@@ -1,22 +1,22 @@
 {
-  "name": "PiCAST",
-  "version": "3.0.0",
-  "description": "PiCAST is a Chromecast-like Project",
+  "name": "Casty",
+  "version": "1.0.0",
+  "description": "Casty is a movie queue device",
   "main": "picast.js",
   "scripts": {
     "test": "echo \"Error: no test specified at this time, sorry!\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "http://www.github.com/lanceseidman/PiCAST"
+    "url": "https://github.com/billykeyss/Casty.git"
   },
   "keywords": [
-    "picast",
+    "casty",
     "chromecast",
     "raspberry pi",
     "raspi"
   ],
-  "author": "Lance Seidman",
+  "author": "Billykeyss",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",

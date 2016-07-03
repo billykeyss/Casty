@@ -34,20 +34,20 @@
     <div id='stars4'></div>
 
     <div class="container">
-      <div class="jumbotron center-align">
-        {{#if title}}
-              <h1> {{title}} <h1>
+        <div class="jumbotron center-align">
+            {{#if title}}
+            <h1> {{title}} <h1>
               <h2> Now Playing </h2>
               {{#if time}}
                 <h2> {{time}}</h2>
                 <h3> Duration of video<h3>
               {{/if}}
-        {{else}}
+            {{else}}
               <h1> Welcome to Casty!<h1>
               <h2> In the URL, type what you want to do... </h2>
               <h3> For Youtube videos, type '/yt-stream/{desired-video-code}' </h2>
               <h3> For Twitch Streams, type '/twitch-stream/{desired-channel-name}' <h3>
-        {{/if}}
+            {{/if}}
         <div >
           <button id="target">Click here</button>
         </div>

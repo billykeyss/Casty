@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $("#submit").click(function() {
+    $(".submit").click(function() {
         var movie = document.getElementById("movieName").value;
         var year = document.getElementById("year").value;
         var url = document.getElementById("url").value;
@@ -10,31 +10,46 @@ $(document).ready(function() {
         });
     });
 
-    $(".delete").click(function(){
-      console.log("DELETE");
-
-
-  //     var $this = $(this),
-  //  myCol = $this.closest("td"),
-  //  myRow = myCol.closest("tr"),
-  //  targetArea = $("#selection");
-  //  var rowId = $("td.data-id", myRow).text();
-
-       var $row = $(this).closest("tr"); // Find the row
-       var $title = $row.find(".title").text(); // Find the text
-       var $year = $row.find(".year").text(); // Find the text
-       // Let's test it out
-       del('/movie-list', {
-           title: $title,
-           year: $year
-       });
+    $(".delete").click(function() {
+        var $row = $(this).closest("tr"); // Find the row
+        var $title = $row.find(".title").text(); // Find the text
+        var $year = $row.find(".year").text(); // Find the text
+        setTimeout(function myFunction() {
+                location.reload();
+            }, 500)
+            // Let's test it out
+        del('/movie-list', {
+            title: $title,
+            year: $year
+        });
     });
 
-    $(".play").click(function(){
-       var $row = $(this).closest("tr"); // Find the row
-       var $jobid = $row.find(".title").text(); // Find the text
-       // Let's test it out
-       console.log($jobid);
+    $(".play").click(function() {
+        var $row = $(this).closest("tr"); // Find the row
+        var $title = $row.find(".title").text(); // Find the text
+        // Let's test it out
+        console.log($title)
+    });
+
+    $(function() {
+        $("#button").click(function() {
+            $("#button").addClass("onclic");
+            setTimeout(validate, 250);
+        });
+
+        function validate() {
+            setTimeout(function() {
+                $("#button").removeClass("onclic");
+                $("#button").addClass("validate");
+                setTimeout(callback, 450);
+            }, 2250);
+        }
+
+        function callback() {
+            setTimeout(function() {
+                $("#button").removeClass("validate");
+            }, 1250);
+        }
     });
 });
 
@@ -63,12 +78,12 @@ function post(path, params, method) {
 }
 
 function del(path, params, method) {
-  $.ajax({
-      type: "DELETE",
-      url: path,
-      data: params,
-      success: function(){
-          console.log('test');
-      }
-  });
+    $.ajax({
+        type: "DELETE",
+        url: path,
+        data: params,
+        success: function() {
+            console.log('test');
+        }
+    });
 }

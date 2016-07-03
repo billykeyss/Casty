@@ -1,22 +1,19 @@
 body, html {
     background-color: black;
     font-family: 'Open Sans', sans-serif;
+    text-align: center;
 }
-
 input[type=text] {
     color: black;
 }
-
 .container {
     height: 100vh;
 }
-
 .jumbotron {
-    background-color:black;
+    background-color: black;
     color: white;
 }
-
 .center-align {
-    text-align:center;
+    text-align: center;
     margin-top: 150px;
 }

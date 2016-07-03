@@ -1,28 +1,155 @@
 body, html {
-    overflow-x: hidden;
-    overflow-y: hidden;
     background-color: black;
     font-family: 'Open Sans', sans-serif;
 }
-
 input[type=text] {
     color: black;
 }
-
 table {
-    margin-top:25px;
+    margin-top: 40px;
 }
-
-.container {
-    height: 100vh;
+th {
+    text-align: center !important;
+    font-size: 20px;
 }
-
+td {
+    vertical-align: middle !important;
+}
 .jumbotron {
-    background-color:black;
+    background-color: black;
     color: white;
 }
-
 .center-align {
-    text-align:center;
+    text-align: center;
     margin-top: 0px;
+}
+.svg-container {
+    text-align: center;
+}
+.circle {
+    stroke: #fff;
+    stroke-dasharray: 650;
+    stroke-dashoffset: 650;
+    -webkit-transition: all 0.5s ease-in-out;
+    opacity: 0.3;
+}
+.playBut {
+    /*  border: 1px solid red;*/
+    display: inline-block;
+    -webkit-transition: all 0.5s ease;
+}
+.playBut .triangle {
+    -webkit-transition: all 0.7s ease-in-out;
+    stroke-dasharray: 240;
+    stroke-dashoffset: 480;
+    stroke: #C0C0C0;
+    transform: translateY(0);
+}
+.playBut:hover .triangle {
+    stroke-dashoffset: 0;
+    opacity: 1;
+    stroke: #fff;
+    animation: nudge 0.7s ease-in-out;
+}
+@keyframes nudge {
+    0% {
+        transform: translateX(0);
+    }
+    30% {
+        transform: translateX(-5px);
+    }
+    50% {
+        transform: translateX(5px);
+    }
+    70% {
+        transform: translateX(-2px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+.playBut:hover .circle {
+    stroke-dashoffset: 0;
+    opacity: 1;
+}
+.btn-container {
+    position: absolute;
+    left: 50%;
+    margin-left: -65px;
+    width: 130px;
+    height: 40px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+button {
+    outline: none;
+    height: 40px;
+    text-align: center;
+    width: 130px;
+    border-radius: 40px;
+    background: #fff;
+    border: 2px solid #1ECD97;
+    color: #1ECD97;
+    letter-spacing: 1px;
+    text-shadow: 0;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+}
+button:hover {
+    color: white;
+    background: #1ECD97;
+}
+button:active {
+    letter-spacing: 2px;
+}
+button:after {
+    content: "SUBMIT";
+}
+.onclic {
+    width: 40px;
+    border-color: #bbbbbb;
+    border-width: 3px;
+    font-size: 0;
+    border-left-color: #1ECD97;
+    -webkit-animation: rotating 2s 0.25s linear infinite;
+    animation: rotating 2s 0.25s linear infinite;
+}
+.onclic:after {
+    content: "";
+}
+.onclic:hover {
+    color: #1ECD97;
+    background: white;
+}
+.validate {
+    font-size: 13px;
+    color: white;
+    background: #1ECD97;
+}
+.validate:after {
+    font-family: 'FontAwesome';
+    content: "\f00c";
+}
+@-webkit-keyframes rotating {
+    from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes rotating {
+    from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }

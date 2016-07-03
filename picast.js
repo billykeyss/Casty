@@ -74,7 +74,7 @@ app.get('/movie-list', function(req, res) {
         var movieData;
         docClient.scan({
             TableName: "MovieList",
-            Limit : 50
+            Limit: 50
         }, function(err, data) {
             if (err) {
                 console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
@@ -93,6 +93,7 @@ app.get('/movie-list', function(req, res) {
     });
 
     promise.then(function(result) {
+        console.log(result);
         res.render(path.join(__dirname + '/movie.html'), {
             'item': result
         });
@@ -103,24 +104,47 @@ app.get('/movie-list', function(req, res) {
 
 app.post('/movie-list', function(req, res) {
     var docClient = new AWS.DynamoDB.DocumentClient();
+    var movieNameArray = req.body.movie.split(" ");
+    movieNameArray = movieNameArray.join("+");
+    var urlTime = "http://www.omdbapi.com/?t=" + movieNameArray + "&y=&plot=short&r=json";
+    request(urlTime, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log(JSON.parse(body));
+            var info = JSON.parse(body);
+            console.log(info.Actors);
+            console.log(typeof(info.Actors));
 
-    var paramsAdd = {
-        TableName: "MovieList",
-        Item: {
-            "year": parseInt(req.body.year),
-            "title": req.body.movie,
-            "url": req.body.url || "No Url"
-        }
-    };
+            var paramsAdd = {
+                TableName: "MovieList",
+                Item: {
+                    "year": parseInt(req.body.year) || parseInt(info.Year),
+                    "title": req.body.movie,
+                    "url": req.body.url || "No Url",
+                    "info": info
+                }
+            };
 
-    docClient.put(paramsAdd, function(err, data) {
-        if (err) {
-            console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
+            docClient.put(paramsAdd, function(err, data) {
+                if (err) {
+                    console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
+                } else {
+                    console.log("Added item:", JSON.stringify(data, null, 2));
+                    res.redirect(req.get('referer'));
+                }
+            });
         } else {
-            console.log("Added item:", JSON.stringify(data, null, 2));
-            res.redirect(req.get('referer'));
+            console.log("Error");
         }
-    });
+    })
+
+    // docClient.put(paramsAdd, function(err, data) {
+    //     if (err) {
+    //         console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
+    //     } else {
+    //         console.log("Added item:", JSON.stringify(data, null, 2));
+    //         res.redirect(req.get('referer'));
+    //     }
+    // });
 });
 
 app.delete('/movie-list', function(req, res) {
@@ -128,7 +152,7 @@ app.delete('/movie-list', function(req, res) {
 
     docClient.delete({
         TableName: "MovieList",
-        Key:{
+        Key: {
             "year": parseInt(req.body.year),
             "title": req.body.title
         }
