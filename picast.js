@@ -112,8 +112,6 @@ app.post('/movie-list', function(req, res) {
         if (!error && response.statusCode == 200) {
             console.log(JSON.parse(body));
             var info = JSON.parse(body);
-            console.log(info.Actors);
-            console.log(typeof(info.Actors));
 
             var paramsAdd = {
                 TableName: "MovieList",
@@ -127,6 +125,9 @@ app.post('/movie-list', function(req, res) {
 
             docClient.put(paramsAdd, function(err, data) {
                 if (err) {
+                    res.render(path.join(__dirname + '/500.html'), {
+                        'error': "Are you sure this movie exists?"
+                    });
                     console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
                 } else {
                     console.log("Added item:", JSON.stringify(data, null, 2));
@@ -137,15 +138,6 @@ app.post('/movie-list', function(req, res) {
             console.log("Error");
         }
     })
-
-    // docClient.put(paramsAdd, function(err, data) {
-    //     if (err) {
-    //         console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
-    //     } else {
-    //         console.log("Added item:", JSON.stringify(data, null, 2));
-    //         res.redirect(req.get('referer'));
-    //     }
-    // });
 
     // torrent to ~/Downloads/
     exec("deluge-console " + req.body.url);

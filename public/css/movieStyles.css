@@ -1,5 +1,5 @@
 body, html {
-    background-color: black;
+    background-color: #252120;
     font-family: 'Open Sans', sans-serif;
 }
 input[type=text] {
@@ -16,7 +16,7 @@ td {
     vertical-align: middle !important;
 }
 .jumbotron {
-    background-color: black;
+    background-color: #252120;
     color: white;
 }
 .center-align {
@@ -42,7 +42,7 @@ td {
     -webkit-transition: all 0.7s ease-in-out;
     stroke-dasharray: 240;
     stroke-dashoffset: 480;
-    stroke: #C0C0C0;
+    stroke: #A92F41;
     transform: translateY(0);
 }
 .playBut:hover .triangle {
@@ -152,4 +152,46 @@ button:after {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
     }
+}
+
+
+.grid-item {
+  width: 175px;
+  float: left;
+  background: #ffffff;
+  border: 2px solid #333;
+  border-color: #1ECD97;
+  border-radius: 5px;
+  margin-top: 50px;
+  margin-right: 15px;
+  margin-bottom: 25px;
+  color:black;
+  opacity: 0.9;
+}
+.grid-item:hover {
+    background: #1ECD97;
+    color:white;
+}
+
+.grid-item-container {
+  padding: 15px;
+}
+
+.grid-title {
+  font-size:20px;
+}
+
+.grid-plot, .grid-actor{
+  font-size:12px !important;
+  text-align: left;
+}
+
+.grid-rating{
+  font-size:12px !important;
+}
+
+.center {
+    margin: auto;
+    width: 100%;
+    padding: 10px;
 }

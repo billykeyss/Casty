@@ -10,10 +10,26 @@ $(document).ready(function() {
         });
     });
 
-    $(".delete").click(function() {
+    $(".play").click(function() {
         var $row = $(this).closest("tr"); // Find the row
         var $title = $row.find(".title").text(); // Find the text
-        var $year = $row.find(".year").text(); // Find the text
+        // Let's test it out
+        console.log($title)
+    });
+
+    $(".play-btn").click(function() {
+        console.log($(this).parent().parent().parent().find(".grid-title").text());
+        console.log($(this).parent().parent().parent().find(".grid-year").text());
+        // var $row = $(this).closest("tr"); // Find the row
+        // var $title = $row.find(".title").text(); // Find the text
+        // // Let's test it out
+        // console.log($title)
+    });
+
+    $(".delete-btn").click(function() {
+        var $grid = $(this).parent().parent().parent(); // Find the row
+        var $title = $grid.find(".grid-title").text(); // Find the text
+        var $year = $grid.find(".grid-year").text(); // Find the text
         setTimeout(function myFunction() {
                 location.reload();
             }, 500)
@@ -22,13 +38,6 @@ $(document).ready(function() {
             title: $title,
             year: $year
         });
-    });
-
-    $(".play").click(function() {
-        var $row = $(this).closest("tr"); // Find the row
-        var $title = $row.find(".title").text(); // Find the text
-        // Let's test it out
-        console.log($title)
     });
 
     $(function() {
