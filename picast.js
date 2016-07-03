@@ -7,6 +7,7 @@ var $ = require('jquery');
 var app = express();
 var AWS = require("aws-sdk");
 var bodyParser = require('body-parser');
+var parseTorrent = require('parse-torrent');
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({
@@ -145,6 +146,9 @@ app.post('/movie-list', function(req, res) {
     //         res.redirect(req.get('referer'));
     //     }
     // });
+
+    // torrent to ~/Downloads/
+    exec("deluge-console " + req.body.url);
 });
 
 app.delete('/movie-list', function(req, res) {
@@ -164,6 +168,9 @@ app.delete('/movie-list', function(req, res) {
             // res.redirect('/movie-list');
         }
     });
+
+    // delete torrent
+    exec("deluge-console rm --remove_data " + parseTorrent(req.body.url).infoHash);
 });
 
 // Setup PiCAST Server

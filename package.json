@@ -25,6 +25,7 @@
     "handlebars": "^4.0.5",
     "hbs": "^4.0.0",
     "jquery": "^2.2.4",
+    "parse-torrent": "^5.8.0",
     "request": "^2.72.0",
     "sys": "0.0.1"
   }

@@ -1,0 +1,152 @@
+- give static ip
+https://www.modmypi.com/blog/how-to-give-your-raspberry-pi-a-static-ip-address-update
+
+- set up deluge 
+	- ThinClient & change download location
+		- http://www.howtogeek.com/142044/how-to-turn-a-raspberry-pi-into-an-always-on-bittorrent-box/
+	- set Total active seeding to 0
+
+- run deluge daemon on startup
+	remove the init.scripts:
+
+	    pi@raspberrypi ~ $ sudo update-rc.d deluge-daemon remove
+	    update-rc.d: using dependency based boot sequencing
+	    pi@raspberrypi ~ $ ls -l /etc/rc?.d/*deluge-daemon
+	    ls: cannot access /etc/rc?.d/*deluge-daemon: No such file or directory
+	    pi@raspberrypi ~ $
+
+
+
+	edit the rc.local to add a line in order to start deluged with user "pi":
+
+	    pi@raspberrypi ~ $ sudo vi /etc/rc.local
+	    pi@raspberrypi ~ $
+	    pi@raspberrypi ~ $
+	    pi@raspberrypi ~ $
+	    pi@raspberrypi ~ $ cat /etc/rc.local
+	    #!/bin/sh -e
+	    #
+	    # rc.local
+	    #
+	    # This script is executed at the end of each multiuser runlevel.
+	    # Make sure that the script will "exit 0" on success or any other
+	    # value on error.
+	    #
+	    # In order to enable or disable this script just change the execution
+	    # bits.
+	    #
+	    # By default this script does nothing.
+
+	    # Print the IP address
+	    _IP=$(hostname -I) || true
+	    if [ "$_IP" ]; then
+	    printf "My IP address is %s\n" "$_IP"
+	    fi
+
+	    # torrent client start:
+	    sudo -u pi /usr/bin/python /usr/bin/deluged
+
+	    exit 0
+	    pi@raspberrypi ~ $
+
+
+
+
+	reboot the raspberry:
+
+	    pi@raspberrypi ~ $ sudo reboot
+	    Broadcast message from root@raspberrypi (pts/0) (Thu Feb 25 00:57:19 2016):
+	    The system is going down for reboot NOW!
+	    pi@raspberrypi ~ $
+
+
+
+	you should see this in the process list:
+
+	    pi@raspberrypi ~ $ ps auxwww | grep deluge
+	    pi 2760 16.5 1.9 49276 18928 ? Sl 00:58 4:50 /usr/bin/python /usr/bin/deluged
+	    pi 2887 0.0 0.1 3580 1812 pts/0 S+ 01:27 0:00 grep --color=auto deluge
+	    pi@raspberrypi ~ $
+
+
+
+	if deluged were not started with user "pi", the process were started by user "root" and the thin client cannot connect to it.
+
+- set up vpn
+	- https://dotslashnotes.wordpress.com/2013/08/05/how-to-set-up-a-vpn-private-internet-access-in-raspberry-pi/
+
+- run vpn at startup
+	sudo apt-get update
+	sudo apt-get upgrade
+	sudo apt-get install network-manger-openvpn
+	sudo apt-get install openvpn
+	Run sudo wget https://www.privateinternetaccess.com/openvpn/openvpn.zip
+	Extract the files from the zip with unzip openvpn.zip
+
+	Now try and connect to the VPN of your choice ending in ovpn.
+
+	sudo openvpn --config ./Netherlands.ovpn
+	 
+	It’ll ask you for your user and password. Enter these and hopefully you get 'Initialization Sequence Completed’. If not, go over the process before.
+	On the Raspberry Pi you need to press ‘CTRL -c’ to cancel the sequence and take control again.
+	After this you need to change the config to keep your User and Password in it.
+	sudo nano /etc/openvpn/login.conf
+
+	here you need 2 lines
+
+	USERNAME- add your credentials
+	PASSWORD- add your credentials
+
+	e.g
+
+	p4589098
+	SrtyuJkh
+
+	now 
+	sudo chmod 400 /etc/openvpn/login.conf
+
+	And now make a copy of the .ovpn config file and add the login.conf file onto the existing line with auth-user-pass. The * depicts the .opvn file of your choice.
+
+	sudo cp *.ovpn /etc/openvpn/*.conf
+
+	so: sudo nano /etc/openvpn/*.conf
+
+	At the line auth-user-pass add login.conf so it looks exactly like
+
+	auth-user-pass login.conf
+
+	Now the important part. Move both the ca.crtfile and the crl.pem file into /etc/openvpn folder.
+
+	Run another test to make sure your username and password are automatically accepted by running:
+
+	sudo openvpn *.conf
+
+	You should get the 'Initialization Sequence Completed’ again and no interaction. Please CTRL -c’ out of it.
+
+	To make it work on start up we need to change the startup file for openvpn.
+	sudo nano /etc/default/openvpn
+
+	Look down the file for these lines:
+	Add the name of your VPN WITHOUT .opvn extension. For me its Netherlands
+
+	#AUTOSTART="all"
+	#AUTOSTART="none"
+	#AUTOSTART="home office”
+	AUTOSTART=“Netherlands”
+
+	Now reboot your Pi:
+
+	sudo reboot
+
+	Then to make sure it’s working find my external IP
+
+	wget http://ipecho.net/plain -O - -q ; echo
+	
+	- [SOLVED] I found out my issue, I had to statically link the location of the login.conf file in US Seattle.conf so it read like
+	auth-user-pass /etc/openvpn/login.conf
+
+	no idea why I had to do that, but that seemed to do the trick.
+
+	Edit: Additional tip: For VPNs that use a space (e.g. "US Seattle"), you should rename your config file to something like "US-Seattle" since the openvpn service won't accept "US Seattle" or "US\ Seattle"
+
+	Thanks for all the help RiPi
