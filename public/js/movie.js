@@ -6,24 +6,22 @@ $(document).ready(function() {
         post('/movie-list', {
             movie: movie,
             year: year,
-            url: url
+            url: url,
+            post: true
         });
     });
 
-    $(".play").click(function() {
-        var $row = $(this).closest("tr"); // Find the row
-        var $title = $row.find(".title").text(); // Find the text
-        // Let's test it out
-        console.log($title)
-    });
-
     $(".play-btn").click(function() {
-        console.log($(this).parent().parent().parent().find(".grid-title").text());
-        console.log($(this).parent().parent().parent().find(".grid-year").text());
-        // var $row = $(this).closest("tr"); // Find the row
-        // var $title = $row.find(".title").text(); // Find the text
-        // // Let's test it out
-        // console.log($title)
+        var $grid = $(this).parent().parent().parent(); // Find the row
+        var $title = $grid.find(".grid-title").text(); // Find the text
+        var $year = $grid.find(".grid-year").text(); // Find the text
+        console.log($title)
+        console.log($year)
+        post('/movie-list', {
+            movie: $title,
+            year: $year,
+            post: false
+        });
     });
 
     $(".delete-btn").click(function() {

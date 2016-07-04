@@ -1,7 +1,57 @@
-<h1>Looks like something went wrong!</h1>
+<!doctype html>
 
-{{error}}
+<html lang="en">
 
-We track these errors automatically, but if the problem persists feel free to contact us. In the meantime, try refreshing.
+<head>
+    <meta charset="utf-8">
 
-<a href="/movie-list">Click here to go back</a>
+    <title>Casty McCast Cast</title>
+    <meta name="description" content="The HTML5 Herald">
+    <meta name="author" content="SitePoint">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="/css/stars.css">
+    <link rel="stylesheet" href="/css/error.css">
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+    <div id='stars'></div>
+    <div id='stars2'></div>
+    <div id='stars3'></div>
+    <div id='stars4'></div>
+
+    <div class="container">
+        <div class="jumbotron center-align">
+            <div class="row">
+                <div class="error-message col-lg-7">
+                    <h1 class="h1-style"> Oops!</h1>
+                    <h2 class="h2-style"> Uh oh, looks like something went wrong. Take a look at the message below to see what we think you did</h2>
+                    <h4 class="h4-style"> Error code: {{code}}</h4>
+                    <h4 class="h4-style"> Error: {{error}}</h4>
+                    <br>
+                    {{err.Error}}
+                    <a href="/movie-list">Click here to go back</a>
+                </div>
+                <div class="error-image col-lg-5">
+                    <img src="/images/500.jpg" height="400px;">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

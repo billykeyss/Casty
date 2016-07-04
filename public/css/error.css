@@ -1,0 +1,40 @@
+body, html {
+    background-color: #11173B;
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    overflow: hidden;
+}
+.jumbotron {
+    background-color: #11173B;
+    color: white;
+    text-aligh: left;
+}
+.container {
+    height: 100vh
+}
+.error-message {
+    word-wrap: break-word;
+    text-align: left;
+}
+.error-image {
+    opacity: 0.6;
+}
+@media only screen and (max-width: 1126px) {
+    .error-image {
+        display: none;
+    }
+}
+.h1-style {
+    font-size: 145px;
+    margin-bottom: 15px;
+}
+.h2-style {
+    font-size: 32px;
+    margin-bottom: 15px;
+    margin-top: 25px;
+}
+.h4-style {
+    margin-top: 25px;
+    font-size: 14px;
+    font-weight: bold;
+}

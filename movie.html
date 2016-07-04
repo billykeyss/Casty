@@ -35,7 +35,7 @@
 
     <div class="container">
         <div class="jumbotron center-align">
-            <h1> Welcome to Basin 3.0 Movie List!<h1>
+          <h1> Welcome to Basin 3.0 Movie List!<h1>
           <h2> In the textbox below, enter in a movie for the queue</h2>
           <br>
           <form class="form-inline">
@@ -59,13 +59,13 @@
           </form>
           <br>
           <div class="btn-container">
-            <button class="submit" id="button"></button>
+              <button class="submit" id="button"></button>
           </div>
           <br>
           <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'>
             {{#each item.Items}}
                 <div class="grid-item">
-                  <img src={{info.Poster}} style="height:200px; padding-top:20px;">
+                  <img src={{poster}} style="max-height:200px; max-width: 160px;padding-top:20px;">
                     <div class="grid-item-container">
                         <p>
                           <div class="grid-title">{{title}}</div>
@@ -73,7 +73,8 @@
                           <span class="grid-year">{{year}}</span>
                           )
                         </p>
-                        <p class="grid-rating">{{info.imdbRating}}/10</p>
+                        <p class="grid-rating">IMDB Rating:<br> {{info.imdbRating}}/10</p>
+                        <p class="grid-rating">Rotton Tomatoes Rating: {{infoRT.rating}}/100</p>
                         <p class="grid-plot">{{info.Plot}}</p>
                         <p class="grid-actor">Starring: {{info.Actors}}</p>
                         <div class="row center">
