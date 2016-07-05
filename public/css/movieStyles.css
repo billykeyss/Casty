@@ -25,6 +25,7 @@ td {
 }
 .svg-container {
     text-align: center;
+    display: inline-block;
 }
 .circle {
     stroke: #fff;
@@ -160,6 +161,7 @@ button:after {
 
 .grid-item {
   width: 175px;
+  height: 750px;
   float: left;
   background: #ffffff;
   border: 2px solid #333;
@@ -169,6 +171,7 @@ button:after {
   margin-bottom: 25px;
   color:black;
   opacity: 0.9;
+  position: relative;
 }
 .grid-item:hover {
     background: #1ECD97;
@@ -193,7 +196,9 @@ button:after {
 }
 
 .center {
-    margin: auto;
     width: 100%;
     padding: 10px;
+    bottom: 0;
+    position: absolute;
+    margin-bottom: 5px;
 }

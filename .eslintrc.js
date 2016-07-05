@@ -16,6 +16,7 @@ module.exports = {
         "radix": "off",
         "no-else-return": "off",
         "max-len": "off",
-        "newline-per-chained-call": "off"
+        "newline-per-chained-call": "off",
+        "no-console": "off"
     }
 };

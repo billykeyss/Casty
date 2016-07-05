@@ -1,5 +1,6 @@
-$(document).ready(function() {
-    $('.submit').click(function() {
+/* eslint no-undef: "off"*/
+$(document).ready(function () {
+    $('.submit').click(function () {
         const movie = document.getElementById('movieName').value;
         const year = document.getElementById('year').value;
         const url = document.getElementById('url').value;
@@ -11,7 +12,7 @@ $(document).ready(function() {
         });
     });
 
-    $('.play-btn').click(function() {
+    $('.play-btn').click(function () {
         const $grid = $(this).parent().parent().parent(); // Find the row
         const $title = $grid.find('.grid-title').text(); // Find the text
         const $year = $grid.find('.grid-year').text(); // Find the text
@@ -24,7 +25,7 @@ $(document).ready(function() {
         });
     });
 
-    $('.delete-btn').click(function() {
+    $('.delete-btn').click(function () {
         const $grid = $(this).parent().parent().parent(); // Find the row
         const $title = $grid.find('.grid-title').text(); // Find the text
         const $year = $grid.find('.grid-year').text(); // Find the text
@@ -38,13 +39,13 @@ $(document).ready(function() {
         });
     });
 
-    $(function() {
-        $('#button').click(function() {
+    $(function () {
+        $('#button').click(function () {
             $('#button').addClass('onclic');
             setTimeout(validate, 250);
         });
 
-        function validate() {
+        function validate () {
             setTimeout(function() {
                 $('#button').removeClass('onclic');
                 $('#button').addClass('validate');
@@ -52,7 +53,7 @@ $(document).ready(function() {
             }, 2250);
         }
 
-        function callback() {
+        function callback () {
             setTimeout(function() {
                 $('#button').removeClass('validate');
             }, 1250);

@@ -120,11 +120,11 @@ app.get('/twitch-stream/:url', function (req, res) {
 
 app.get('/movie-list', function (req, res) {
     exec('killall livestreamer');
-    var promise = new Promise(function (resolve, reject) {
+    const scanTable = new Promise(function (resolve, reject) {
         docClient.scan({
             TableName: 'MovieList',
             Limit: 50
-        }, function(err, data) {
+        }, function (err, data) {
             if (err) {
                 console.error('Unable to scan the table. Error JSON:', JSON.stringify(err, null, 2));
             } else {
@@ -136,13 +136,11 @@ app.get('/movie-list', function (req, res) {
                     reject(Error('It broke'));
                 }
             }
-
         });
     });
-
-    promise.then(function (result) {
+    scanTable.then(function (result) {
         res.render(path.join(__dirname + '/movie.html'), {
-            'item': result
+            item: result
         });
     }, function (err) {
         console.log(err); // Error: 'It broke'
@@ -151,67 +149,64 @@ app.get('/movie-list', function (req, res) {
 
 app.post('/movie-list', function (req, res) {
     if (req.body.post) {
-        var docClient = new AWS.DynamoDB.DocumentClient();
-        var movieNameArray = req.body.movie.split(' ');
-        movieNameArray = movieNameArray.join('+');
-        var urlOmdb = 'http://www.omdbapi.com/?t=' + movieNameArray + '&y=&plot=short&r=json&apikey=4545f38d';
-        var url_rt = 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=ny97sdcpqetasj8a4v2na8va&q=' + movieNameArray + '&page_limit=1';
+        const movieNameArray = req.body.movie.split(' ').join('+');
+        const urlOmdb = 'http://www.omdbapi.com/?t=' + movieNameArray + '&y=&plot=short&r=json&apikey=4545f38d';
+        const urlRT = 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=ny97sdcpqetasj8a4v2na8va&q=' + movieNameArray + '&page_limit=1';
 
-        var imdbRequest = function () {
+        const imdbRequest = function () {
             return new Promise(function (resolve, reject) {
                 request(urlOmdb, function (error, response, body) {
                     if (!error && response.statusCode == 200) {
-                        var info = JSON.parse(body);
-                        resolve(info);
+                        resolve(JSON.parse(body));
                     } else {
                         reject(Error('It broke'));
                     }
-                })
-            })
+                });
+            });
         };
 
-        var RTRequest = function (info) {
+        const RTRequest = function (info) {
             return new Promise(function (resolve, reject) {
-                request(url_rt, function (error, response, body) {
+                request(urlRT, function (error, response, body) {
                     if (!error && response.statusCode == 200) {
-                        var info_rt = JSON.parse(body).movies[0];
-                        var info_rt_db = {};
-                        if (info_rt) {
-                            info_rt_db = {
-                                'runtime': info_rt.runtime,
-                                'rating': info_rt.ratings.critics_score
-                            }
+                        const infoRT = JSON.parse(body).movies[0];
+                        var infoRTData = {}; // eslint-disable-line no-var
+                        if (infoRT) {
+                            infoRTData = {
+                                runtime: infoRT.runtime,
+                                rating: infoRT.ratings.critics_score
+                            };
                         }
 
-                        var paramsAdd = {
+                        var paramsAdd = { // eslint-disable-line no-var
                             TableName: 'MovieList',
                             Item: {
-                                'year': parseInt(req.body.year) || parseInt(info.Year),
-                                'title': titleCase(req.body.movie),
-                                'url': req.body.url || 'No Url',
-                                'info': info,
-                                'infoRT': info_rt_db
+                                year: parseInt(req.body.year) || parseInt(info.Year),
+                                title: titleCase(req.body.movie),
+                                url: req.body.url || 'No Url',
+                                info: info,
+                                infoRT: infoRTData
                             }
                         };
                         resolve(paramsAdd);
                     } else {
                         reject(Error('It broke'));
                     }
-                })
-            })
+                });
+            });
         };
 
-        imdbRequest().then(function(info) {
+        imdbRequest().then(function (info) {
             return RTRequest(info);
-        }).then(function(paramsAdd) {
-            var url_poster = 'http://img.omdbapi.com/?i=' + paramsAdd.Item.info.imdbID + '&apikey=4545f38d';
-            paramsAdd.Item.poster = url_poster;
-            docClient.put(paramsAdd, function(err, data) {
+        }).then(function (paramsAdd) {
+            const putParams = paramsAdd;
+            putParams.Item.poster = 'http://img.omdbapi.com/?i=' + paramsAdd.Item.info.imdbID + '&apikey=4545f38d';
+            docClient.put(putParams, function (err, data) {
                 if (err) {
                     res.render(path.join(__dirname + '/500.html'), {
-                        'error': 'Are you sure this movie exists? Go back and double check the spelling!',
-                        'errorJSON': err,
-                        'code': '404'
+                        error: 'Are you sure this movie exists? Go back and double check the spelling!',
+                        errorJSON: err,
+                        code: '404'
                     });
                     console.error('Unable to add item. Error JSON:', JSON.stringify(err, null, 2));
                 } else {
@@ -219,7 +214,7 @@ app.post('/movie-list', function (req, res) {
                     res.redirect(req.get('referer'));
                 }
             });
-        }).catch(function(error) {
+        }).catch(function (error) {
             console.log('oh no', error);
         });
 
@@ -230,16 +225,16 @@ app.post('/movie-list', function (req, res) {
     }
 });
 
-app.delete('/movie-list', function(req, res) {
+app.delete('/movie-list', function (req, res) { // eslint-disable-line no-unused-vars
     console.log('Attempting a delete...');
 
     docClient.delete({
         TableName: 'MovieList',
         Key: {
-            'year': parseInt(req.body.year),
-            'title': req.body.title
+            year: parseInt(req.body.year),
+            title: req.body.title
         }
-    }, function(err, data) {
+    }, function (err, data) {
         if (err) {
             console.error('Unable to delete item. Error JSON:', JSON.stringify(err, null, 2));
         } else {
@@ -253,9 +248,9 @@ app.delete('/movie-list', function(req, res) {
 });
 
 // Setup PiCAST Server
-var srv = app.listen(3000, function() {
-    var host = srv.address().address;
-    var port = srv.address().port;
+var srv = app.listen(3000, function () { // eslint-disable-line no-var
+    const host = srv.address().address;
+    const port = srv.address().port;
 
     console.log('Access at http://%s:%s', host, port);
 });
