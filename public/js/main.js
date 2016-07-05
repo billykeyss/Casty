@@ -1,4 +1,4 @@
-/*eslint no-undef: "off"*/
+/* eslint no-undef: "off"*/
 
 $(document).ready(function () {
     $('#target').click(function () {

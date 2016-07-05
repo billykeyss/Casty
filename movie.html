@@ -65,7 +65,7 @@
           <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'>
             {{#each item.Items}}
                 <div class="grid-item">
-                  <img src={{poster}} style="max-height:200px; max-width: 160px;padding-top:20px;">
+                  <img src={{poster}} onerror="this.src='http://sd.keepcalm-o-matic.co.uk/i/keep-calm-poster-not-found.png'" style="max-height:200px; max-width: 160px;padding-top:20px;">
                     <div class="grid-item-container">
                         <p>
                           <div class="grid-title">{{title}}</div>

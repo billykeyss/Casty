@@ -1,4 +1,4 @@
-var AWS = require('aws-sdk');
+const AWS = require('aws-sdk');
 
 AWS.config.update({
     region: 'us-west-2',
@@ -8,10 +8,10 @@ AWS.config.update({
 const dynamodb = new AWS.DynamoDB();
 
 const params = {
-    TableName : 'MovieList',
+    TableName: 'MovieList',
     KeySchema: [
-        { AttributeName: 'year', KeyType: 'HASH'},  //Partition key
-        { AttributeName: 'title', KeyType: 'RANGE' }  //Sort key
+        { AttributeName: 'year', KeyType: 'HASH' },  // Partition key
+        { AttributeName: 'title', KeyType: 'RANGE' }  // Sort key
     ],
     AttributeDefinitions: [
         { AttributeName: 'year', AttributeType: 'N' },
@@ -23,7 +23,7 @@ const params = {
     }
 };
 
-dynamodb.createTable(params, function(err, data) {
+dynamodb.createTable(params, function (err, data) {
     if (err) {
         console.error('Unable to create table. Error JSON:', JSON.stringify(err, null, 2));
     } else {

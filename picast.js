@@ -165,7 +165,7 @@ app.post('/movie-list', function (req, res) {
             });
         };
 
-        const RTRequest = function (info) {
+        const rtRequest = function (info) {
             return new Promise(function (resolve, reject) {
                 request(urlRT, function (error, response, body) {
                     if (!error && response.statusCode == 200) {
@@ -197,7 +197,7 @@ app.post('/movie-list', function (req, res) {
         };
 
         imdbRequest().then(function (info) {
-            return RTRequest(info);
+            return rtRequest(info);
         }).then(function (paramsAdd) {
             const putParams = paramsAdd;
             putParams.Item.poster = 'http://img.omdbapi.com/?i=' + paramsAdd.Item.info.imdbID + '&apikey=4545f38d';
@@ -221,7 +221,7 @@ app.post('/movie-list', function (req, res) {
         // torrent to ~/Downloads/
         exec('deluge-console ' + req.body.url);
     } else {
-        //TODO Play the movie
+        // TODO Play the movie
     }
 });
 

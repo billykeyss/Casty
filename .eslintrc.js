@@ -17,6 +17,8 @@ module.exports = {
         "no-else-return": "off",
         "max-len": "off",
         "newline-per-chained-call": "off",
-        "no-console": "off"
+        "no-console": "off",
+        "object-shorthand": "off",
+        "no-restricted-syntax": "off"
     }
 };
