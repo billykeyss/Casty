@@ -4,7 +4,8 @@
   "description": "Casty is a movie queue device",
   "main": "picast.js",
   "scripts": {
-    "test": "echo \"Error: no test specified at this time, sorry!\" && exit 1"
+    "test": "echo \"Error: no test specified at this time, sorry!\" && exit 1",
+    "lint": "./node_modules/.bin/eslint picast.js public/js InitDynamoDB/"
   },
   "repository": {
     "type": "git",
@@ -21,12 +22,13 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "ejs": "^2.4.2",
+    "eslint": "^3.0.1",
     "express": "^4.13.3",
     "handlebars": "^4.0.5",
     "hbs": "^4.0.0",
     "jquery": "^2.2.4",
-    "parse-torrent": "^5.8.0",
     "masonry-layout": "^4.1.0",
+    "parse-torrent": "^5.8.0",
     "request": "^2.72.0",
     "sys": "0.0.1"
   }

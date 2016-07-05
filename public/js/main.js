@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $("#target").click(function() {
-        console.log("test");
+    $('#target').click(function() {
+        console.log('test');
     });
 });

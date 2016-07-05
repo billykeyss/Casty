@@ -1,8 +1,8 @@
 $(document).ready(function() {
-    $(".submit").click(function() {
-        var movie = document.getElementById("movieName").value;
-        var year = document.getElementById("year").value;
-        var url = document.getElementById("url").value;
+    $('.submit').click(function() {
+        const movie = document.getElementById('movieName').value;
+        const year = document.getElementById('year').value;
+        const url = document.getElementById('url').value;
         post('/movie-list', {
             movie: movie,
             year: year,
@@ -11,10 +11,10 @@ $(document).ready(function() {
         });
     });
 
-    $(".play-btn").click(function() {
-        var $grid = $(this).parent().parent().parent(); // Find the row
-        var $title = $grid.find(".grid-title").text(); // Find the text
-        var $year = $grid.find(".grid-year").text(); // Find the text
+    $('.play-btn').click(function() {
+        const $grid = $(this).parent().parent().parent(); // Find the row
+        const $title = $grid.find('.grid-title').text(); // Find the text
+        const $year = $grid.find('.grid-year').text(); // Find the text
         console.log($title)
         console.log($year)
         post('/movie-list', {
@@ -24,10 +24,10 @@ $(document).ready(function() {
         });
     });
 
-    $(".delete-btn").click(function() {
-        var $grid = $(this).parent().parent().parent(); // Find the row
-        var $title = $grid.find(".grid-title").text(); // Find the text
-        var $year = $grid.find(".grid-year").text(); // Find the text
+    $('.delete-btn').click(function() {
+        const $grid = $(this).parent().parent().parent(); // Find the row
+        const $title = $grid.find('.grid-title').text(); // Find the text
+        const $year = $grid.find('.grid-year').text(); // Find the text
         setTimeout(function myFunction() {
                 location.reload();
             }, 500)
@@ -39,42 +39,42 @@ $(document).ready(function() {
     });
 
     $(function() {
-        $("#button").click(function() {
-            $("#button").addClass("onclic");
+        $('#button').click(function() {
+            $('#button').addClass('onclic');
             setTimeout(validate, 250);
         });
 
         function validate() {
             setTimeout(function() {
-                $("#button").removeClass("onclic");
-                $("#button").addClass("validate");
+                $('#button').removeClass('onclic');
+                $('#button').addClass('validate');
                 setTimeout(callback, 450);
             }, 2250);
         }
 
         function callback() {
             setTimeout(function() {
-                $("#button").removeClass("validate");
+                $('#button').removeClass('validate');
             }, 1250);
         }
     });
 });
 
 function post(path, params, method) {
-    method = method || "post"; // Set method to post by default if not specified.
+    method = method || 'post'; // Set method to post by default if not specified.
 
     // The rest of this code assumes you are not using a library.
     // It can be made less wordy if you use one.
-    var form = document.createElement("form");
-    form.setAttribute("method", method);
-    form.setAttribute("action", path);
+    const form = document.createElement('form');
+    form.setAttribute('method', method);
+    form.setAttribute('action', path);
 
     for (var key in params) {
         if (params.hasOwnProperty(key)) {
-            var hiddenField = document.createElement("input");
-            hiddenField.setAttribute("type", "hidden");
-            hiddenField.setAttribute("name", key);
-            hiddenField.setAttribute("value", params[key]);
+            const hiddenField = document.createElement('input');
+            hiddenField.setAttribute('type', 'hidden');
+            hiddenField.setAttribute('name', key);
+            hiddenField.setAttribute('value', params[key]);
 
             form.appendChild(hiddenField);
         }
@@ -86,7 +86,7 @@ function post(path, params, method) {
 
 function del(path, params, method) {
     $.ajax({
-        type: "DELETE",
+        type: 'DELETE',
         url: path,
         data: params,
         success: function() {
