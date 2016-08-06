@@ -27,3 +27,8 @@ Stream Twitch: http://pi-ip:3000/yt-stream/channel-name
 
 
 Copy the mplayerConfig.txt file to your mplayer config file on your local machine
+
+
+# CASTY 2.0
+
+Create a customised movie queue list, just run setup-casty.sh. 
